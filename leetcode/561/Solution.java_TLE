@@ -1,0 +1,31 @@
+// O(n^2)
+public class Solution {
+    public int arrayPairSum(int[] nums) {
+        
+        int max1 = -10001;
+        int maxIndex = -1;
+        int max2 = -10001;
+        int max2Index = -1;
+        int output = 0;
+        for (int i = 0; i< nums.length/2; i++) {
+            
+            for (int j = 0; j < nums.length; j++) {
+               if (nums[j] <= 10000 && nums[j] >= max1) {
+                   max2 = max1;
+                   max2Index = maxIndex;
+                   maxIndex = j;
+                   max1 = nums[j];
+               } else if (nums[j] <= 10000 && nums[j] > max2) {
+                   max2 = nums[j];
+                   max2Index = j;
+               }
+            }
+            output += max2;
+            max1 = max2 = -10001;
+            nums[maxIndex] = 10001;
+            nums[max2Index] = 10001;
+        }
+        return output;
+        
+    }
+}
