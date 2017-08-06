@@ -14,7 +14,7 @@ public class ReverseNumber {
     int upper = 10;
 
     while (upper < n) {
-      //need to check for buffer overflow here
+      //need to check for integer overflow here
       upper *= 10;
     }
       upper /= 10;
