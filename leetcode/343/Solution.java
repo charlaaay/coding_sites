@@ -10,9 +10,10 @@ public class Solution {
 
 	public int integerBreak(int n) {
 		
-		//at each index, find all the combinations that sum up to N,
-		//and the max product is whichever combination yields the highest
-		//prod. You can memorize the indexes
+		if (n <= 3) {
+			return n-1;
+		}
+		
 		int[] maxProds = new int[n+1];
 		int num1, num2, num1Prod, num2Prod, currentValue;
 		for (int i = 0; i<= n; i++) {
@@ -37,5 +38,4 @@ public class Solution {
 		Solution sol = new Solution();
 		System.out.println(sol.integerBreak(2));
 	}
-
 }
