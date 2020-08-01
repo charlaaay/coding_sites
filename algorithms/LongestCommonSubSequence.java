@@ -4,7 +4,7 @@ public class LongestCommonSubSequence {
 
   private static HashMap<Integer, HashMap<Integer, ArrayList<Character>>> pad = new HashMap<Integer, HashMap<Integer, ArrayList<Character>>>();
   public static void main(String[] args) {
-     String s1 = "ACCGGTCGAGTGCGCGGAAGCCGGCCGAA";
+     /*String s1 = "ACCGGTCGAGTGCGCGGAAGCCGGCCGAA";
      String s2 = "GTCGTTCGGAATGCCGTTGCTCTGTAAA";
      System.out.println("Sizes: " + s1.length() + "..." + s2.length());
      ArrayList<Character> result = LCS(s1, s2);
@@ -12,6 +12,38 @@ public class LongestCommonSubSequence {
      for (int i = 0; i < result.size(); i++) {
       System.out.print(result.get(i));
      }
+      */
+
+      System.out.println(doWork("BAC", "ABAC"));
+  }
+
+  public static int doWork(String x, String y) {
+    if (x.length() == 0 || y.length() == 0) {
+      return 0;
+    }
+    int[][] holder = new int[y.length()+1][x.length() + 1];
+    
+    for (int i = 0; i < holder.length; i++) {
+      for (int j = 0; j < holder[0].length; j++) {
+        holder[i][j] = 0;
+        int choice1 = 0; int choice2 = 0; int choice3 = 0;
+
+        if (j - 1 >= 0) {
+          choice1 = holder[i][j-1];
+        }
+        if (i - 1 >= 0) {
+          choice2 = holder[i-1][j];
+        }
+        if ((i - 1 >= 0) && (j - 1 >= 0)) {
+          choice3 = holder[i-1][j-1];
+          if (y.charAt(i-1) == x.charAt(j-1)) {
+            choice3++;
+          }
+        }
+        holder[i][j] = Math.max(Math.max(choice1, choice2), choice3);
+      }
+    }
+    return holder[y.length()][x.length()];
   }
 
   public static ArrayList<Character> LCS(String s1, String s2) {
